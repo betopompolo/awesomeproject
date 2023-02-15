@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Pressable,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -57,6 +58,7 @@ function Section({children, title}: SectionProps): JSX.Element {
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const [text, setText] = useState('Debug');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -83,9 +85,11 @@ function App(): JSX.Element {
           <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
+          <Pressable onPress={() => setText('Hey ya!')}>
+            <Section title={text}>
+              <DebugInstructions />
+            </Section>
+          </Pressable>
           <Section title="Learn More">
             Read the docs to discover what to do next:
           </Section>
